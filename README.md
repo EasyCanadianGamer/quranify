@@ -1,54 +1,59 @@
-# React + TypeScript + Vite
+# Quranify
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Quranify is a modern web application for reading and listening to Quranic verses with translations. Built using React, Vite, TypeScript, and Tailwind CSS, it provides a seamless and elegant experience for users.
 
-Currently, two official plugins are available:
+## Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react/README.md) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+* Fetch Quranic verses and translations via[Quran API](https://quranapi.pages.dev/)
+* Listen to recitations of the Quran
+* Supports multiple translation options
+* Beautiful UI with Amiri Quran font for an authentic reading experience
+* Responsive design with Tailwind CSS
 
-## Expanding the ESLint configuration
+## Installation
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+To install and run Quranify, follow these steps:
 
-```js
-export default tseslint.config({
-  extends: [
-    // Remove ...tseslint.configs.recommended and replace with this
-    ...tseslint.configs.recommendedTypeChecked,
-    // Alternatively, use this for stricter rules
-    ...tseslint.configs.strictTypeChecked,
-    // Optionally, add this for stylistic rules
-    ...tseslint.configs.stylisticTypeChecked,
-  ],
-  languageOptions: {
-    // other options...
-    parserOptions: {
-      project: ['./tsconfig.node.json', './tsconfig.app.json'],
-      tsconfigRootDir: import.meta.dirname,
-    },
-  },
-})
-```
+1. Clone the repository:
+   ```sh
+   git clone https://github.com/EasyCanadianGamer/quranify.git
+   cd quranify
+   ```
+2. Install dependencies:
+   ```sh
+   npm install
+   ```
+3. Start the development server:
+   ```sh
+   npm run dev
+   ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+## Usage
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+Visit the local development server URL displayed in the terminal after running the app.
 
-export default tseslint.config({
-  plugins: {
-    // Add the react-x and react-dom plugins
-    'react-x': reactX,
-    'react-dom': reactDom,
-  },
-  rules: {
-    // other rules...
-    // Enable its recommended typescript rules
-    ...reactX.configs['recommended-typescript'].rules,
-    ...reactDom.configs.recommended.rules,
-  },
-})
-```
+## Dependencies
+
+* React
+* Vite
+* TypeScript
+* Tailwind CSS
+* Quran API ([quranapi.pages.dev](https://quranapi.pages.dev/))
+* Amiri Quran font ([Google Fonts](https://fonts.google.com/specimen/Amiri+Quran?query=Amiri))
+
+## Contributing
+
+Feel free to fork this repository and submit pull requests with improvements or new features.
+
+## License
+
+This project is licensed under the MIT License. See the `LICENSE` file for details.
+
+## Acknowledgments
+
+* Quran API providers for translation and recitation data.
+* Open-source contributors who help improve this project.
+
+---
+
+For more details, visit the [GitHub repository](https://github.com/EasyCanadianGamer/quranify).

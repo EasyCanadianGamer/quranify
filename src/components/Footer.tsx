@@ -10,7 +10,7 @@ const Footer = () => {
           {/* Left Section: Copyright and Links */}
           <div className="text-center md:text-left">
             <p className="text-sm">
-              &copy; {new Date().getFullYear()} Quran App. All rights reserved.
+              &copy; {new Date().getFullYear()} Quranify. All rights reserved.
             </p>
             <div className="mt-2 space-x-4">
               <a href="/about" className="text-sm hover:text-blue-700">
