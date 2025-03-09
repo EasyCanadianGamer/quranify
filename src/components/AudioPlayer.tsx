@@ -1,5 +1,5 @@
 // src/components/AudioPlayer.tsx
-import React, { useRef, useState, useEffect } from 'react';
+import  { useRef, useState, useEffect } from 'react';
 import { FaPlay, FaPause, FaForward, FaStepForward } from 'react-icons/fa';
 
 const CustomAudioPlayer = ({
