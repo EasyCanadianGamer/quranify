@@ -53,7 +53,7 @@ const Footer = () => {
           {/* Right Section: Social Media Links */}
           <div className="flex space-x-4">
             <a
-              href="https://github.com/yourusername"
+              href="https://github.com/EasyCanadianGamer"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-blue-700"
@@ -61,7 +61,7 @@ const Footer = () => {
               <FaGithub size={20} />
             </a>
             <a
-              href="https://twitter.com/yourusername"
+              href="https://x.com/C_G_2_3"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-blue-700"
@@ -69,7 +69,7 @@ const Footer = () => {
               <FaTwitter size={20} />
             </a>
             <a
-              href="https://linkedin.com/in/yourusername"
+              href="https://linkedin.com/in/eyadm"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-blue-700"
