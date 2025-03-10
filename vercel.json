@@ -1,0 +1,9 @@
+{
+    "rewrites": [
+      {
+        "source": "/surah/:path*",
+        "destination": "/index.html"
+      }
+    ]
+  }
+  
