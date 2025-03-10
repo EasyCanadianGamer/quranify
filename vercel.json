@@ -1,9 +1,5 @@
 {
     "rewrites": [
-      {
-        "source": "/surah/:path*",
-        "destination": "/index.html"
-      }
+      {"source": "/:a*", "destination": "/"}
     ]
   }
-  
