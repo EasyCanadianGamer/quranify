@@ -1,8 +1,8 @@
 // src/utils/api.ts
 import axios from 'axios';
 
-const BASE_URL = 'https://quranapi.pages.dev/api';
-const AUDIO_URL = 'https://quranaudio.pages.dev';
+const BASE_URL = import.meta.env.VITE_API_BASE_URL;
+const AUDIO_URL = import.meta.env.VITE_API_AUDIO_URL;
 
 
 // Fetch all Surahs
