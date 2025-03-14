@@ -3,8 +3,8 @@ import { useEffect, useState, useRef } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import { fetchSurah, fetchReciters, fetchVerseAudio, fetchChapterAudio } from '../utils/api';
 import CustomAudioPlayer from './AudioPlayer';
-import { FaPlay, FaPause , FaArrowLeft} from 'react-icons/fa';
-import '../css/surah.css'
+import { FaPlay, FaPause, FaArrowLeft } from 'react-icons/fa';
+import '../css/surah.css';
 
 const SurahDetail = () => {
   const { surahNumber } = useParams<{ surahNumber: string }>();
@@ -95,10 +95,9 @@ const SurahDetail = () => {
 
   return (
     <div className="p-4 pb-24"> {/* Add padding-bottom to prevent content from being hidden behind the floating player */}
-    
       <button onClick={() => navigate(-1)} className="p-2 bg-blue-500 text-white rounded-lg hover:bg-blue-600">
-  <FaArrowLeft size={20} />
-</button>
+        <FaArrowLeft size={20} />
+      </button>
 
       <h1 className="text-2xl font-bold">{surah.surahName}</h1>
       <h2 className="text-xl text-gray-700">{surah.surahNameArabic}</h2>
