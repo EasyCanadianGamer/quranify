@@ -1,4 +1,3 @@
-import React from "react";
 import GoogleAd from "./GoogleAd";
 
 const Sidebar = () => {
