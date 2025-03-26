@@ -3,14 +3,14 @@
 // import SurahDetail from './components/SurahDetail';
 // import Header from './components/Header';
 // import Footer from './components/Footer';
-// import Sidebar from "./components/Sidebar";
+// import GoogleAd from "./components/GoogleAd";
+
 // const App = () => {
 //   return (
 //     <BrowserRouter>
 //       <div className="min-h-screen bg-gray-50 flex">
 
-//              {/* Sidebar */}
-//              <Sidebar />
+        
 //         {/* Header */}
 //         <Header />
 
@@ -44,7 +44,7 @@
 
 import Header from "./components/Header";
 import Footer from "./components/Footer";
-import Sidebar from "./components/Sidebar";
+// import Sidebar from "./components/Sidebar";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SurahList from "./components/SurahList";
 import SurahDetail from "./components/SurahDetail";
@@ -53,8 +53,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50 flex">
-        {/* Sidebar */}
-        <Sidebar />
+        {/* Sidebar
+        <Sidebar /> */}
 
         <div className="flex-1 flex flex-col">
           {/* Header */}
