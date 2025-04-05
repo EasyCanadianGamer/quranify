@@ -2,14 +2,23 @@ import GoogleAd from "./GoogleAd";
 
 const Sidebar = () => {
   return (
-    <aside className="w-1/4 p-4 bg-gray-200">
-      <h2 className="text-lg font-bold mb-4">Sponsored</h2>
-      <GoogleAd
-        adClient="ca-pub-7291561218913011"
-        adSlot="6199538265"
-        style={{ display: "block", width: "100%" }}
-      />
-    </aside>
+    <>
+      {/* Google Ads */}
+      <div className="sticky top-4">
+        <GoogleAd
+          adClient="ca-pub-7291561218913011"
+          adSlot="6199538265"
+          style={{ display: "block", width: "100%" }}
+        />
+      </div>
+      <div className="mt-4">
+        <GoogleAd
+          adClient="ca-pub-7291561218913011"
+          adSlot="1234567890"
+          style={{ display: "block", width: "100%" }}
+        />
+      </div>
+    </>
   );
 };
 
