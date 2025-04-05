@@ -51,7 +51,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import SurahList from "./components/SurahList";
 import SurahDetail from "./components/SurahDetail";
 import AdBanner from "./components/AdBanner";
-import AdBanner160x600 from "./components/AdBanner160x600";
+// import AdBanner160x600 from "./components/AdBanner160x600";
 import AdBanner728x90 from "./components/AdBanner728x90";
 import AdBanner320x50 from "./components/AdBanner320x50";
 import ConversionTracker from "./components/ConversionTracker";
@@ -61,11 +61,11 @@ const App = () => {
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50 flex">
         {/* Left Sidebar - Vertical Ad */}
-        <div className="hidden md:block sticky top-0 h-screen">
+        {/* <div className="hidden md:block sticky top-0 h-screen">
           <div className="p-4">
             <AdBanner160x600 />
           </div>
-        </div>
+        </div> */}
 
         {/* Main Content */}
         <div className="flex-1 flex flex-col">
