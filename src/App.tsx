@@ -58,7 +58,7 @@ import ConversionTracker from "./components/ConversionTracker";
 import Sidebar from "./components/Sidebar";
 import Roadmap from "./components/Roadmap";
 import DuaList from "./components/DuaList";
-
+import About from "./components/About";
 
 const App = () => {
 
@@ -101,7 +101,7 @@ const App = () => {
               <Route path="/surah/:surahNumber" element={<SurahDetail />} />
               <Route path="/roadmap" element={<Roadmap />} />
               <Route path="/dua" element={<DuaList />} />
-
+              <Route path="/about" element={<About />} />
             </Routes>
 
             {/* Bottom Rectangle Ad */}
