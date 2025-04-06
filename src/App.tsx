@@ -57,6 +57,9 @@ import AdBanner320x50 from "./components/AdBanner320x50";
 import ConversionTracker from "./components/ConversionTracker";
 import Sidebar from "./components/Sidebar";
 import Roadmap from "./components/Roadmap";
+import DuaList from "./components/DuaList";
+
+
 const App = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -97,6 +100,7 @@ const App = () => {
               <Route path="/" element={<SurahList />} />
               <Route path="/surah/:surahNumber" element={<SurahDetail />} />
               <Route path="/roadmap" element={<Roadmap />} />
+              <Route path="/dua" element={<DuaList />} />
 
             </Routes>
 
