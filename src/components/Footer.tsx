@@ -1,6 +1,6 @@
 
 import { FaGithub, FaTwitter, FaLinkedin } from 'react-icons/fa';
-
+  
 const Footer = () => {
   return (
     <footer className="bg-gray-100 text-black py-6 mt-8">
