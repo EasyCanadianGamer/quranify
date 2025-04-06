@@ -37,7 +37,7 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
               </a>
             </li>
             <li>
-              <a href="dualist" className="block p-2 hover:bg-gray-100 rounded">
+              <a href="dua" className="block p-2 hover:bg-gray-100 rounded">
                 Duas
               </a>
             </li>
