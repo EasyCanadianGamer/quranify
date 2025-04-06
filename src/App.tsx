@@ -44,7 +44,7 @@
 
 // export default App;
 
-
+import { useState } from "react";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
@@ -55,11 +55,21 @@ import AdBanner from "./components/AdBanner";
 import AdBanner728x90 from "./components/AdBanner728x90";
 import AdBanner320x50 from "./components/AdBanner320x50";
 import ConversionTracker from "./components/ConversionTracker";
-
+import Sidebar from "./components/Sidebar";
+import Roadmap from "./components/Roadmap";
 const App = () => {
+
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
+
+  const toggleSidebar = () => {
+    setIsSidebarOpen(!isSidebarOpen);
+  };
+
   return (
     <BrowserRouter>
       <div className="min-h-screen bg-gray-50 flex">
+      <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSidebar} />
+     
         {/* Left Sidebar - Vertical Ad */}
         {/* <div className="hidden md:block sticky top-0 h-screen">
           <div className="p-4">
@@ -68,6 +78,7 @@ const App = () => {
         </div> */}
 
         {/* Main Content */}
+        
         <div className="flex-1 flex flex-col">
           {/* Top Leaderboard Ad */}
           <div className="w-full">
@@ -79,12 +90,14 @@ const App = () => {
             </div>
           </div>
 
-          <Header />
+          <Header toggleSidebar={toggleSidebar} />
 
           <main className="container mx-auto p-4 flex-grow">
             <Routes>
               <Route path="/" element={<SurahList />} />
               <Route path="/surah/:surahNumber" element={<SurahDetail />} />
+              <Route path="/roadmap" element={<Roadmap />} />
+
             </Routes>
 
             {/* Bottom Rectangle Ad */}
