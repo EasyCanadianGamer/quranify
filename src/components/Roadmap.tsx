@@ -17,20 +17,22 @@ const Roadmap = () => {
       title: 'Implement Sidebar Navigation',
       description: 'Add a mobile-friendly sidebar with surah list',
       status: 'completed',
-      completedDate: '2023-10-15'
+      completedDate: '2025-4-6'
     },
     {
       id: 2,
       title: 'Add Search Functionality',
       description: 'Enable searching across surahs and verses',
       status: 'completed',
-      targetDate: '2023-11-30'
+      completedDate: '2025-4-6'
     },
     {
       id: 3,
       title: 'Authentication',
       description: 'add a authentication system',
       status: 'in-progress',
+      targetDate: '2023-11-30'
+
     },
     {
         id: 4,
