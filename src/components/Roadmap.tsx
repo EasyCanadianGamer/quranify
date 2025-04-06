@@ -9,9 +9,9 @@ type RoadmapItem = {
   targetDate?: string;
   completedDate?: string;
 };
-
+//setRoadmapItems
 const Roadmap = () => {
-  const [roadmapItems, setRoadmapItems] = useState<RoadmapItem[]>([
+  const [roadmapItems] = useState<RoadmapItem[]>([
     {
       id: 1,
       title: 'Implement Sidebar Navigation',
