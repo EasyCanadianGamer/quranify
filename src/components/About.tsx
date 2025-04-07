@@ -80,7 +80,7 @@ const About = () => {
                   LinkedIn
                 </a>
                 <a 
-                  href="https://github.com/eyadm" 
+                  href="https://github.com/EasyCanadianGamer" 
                   target="_blank" 
                   rel="noopener noreferrer"
                   className="flex items-center text-gray-700 hover:text-gray-900"
