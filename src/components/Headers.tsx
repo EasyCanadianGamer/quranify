@@ -1,14 +1,16 @@
-// src/components/Header.tsx
 import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FiSettings, FiLogOut } from "react-icons/fi";
-import { createClient } from '../utils/supbase';
+import { createClient } from '@supabase/supabase-js';
 import word from "../assets/Quranify(word).png";
 import { CiBookmark } from "react-icons/ci";
 import { getUserDetails } from '../utils/api';
 
-const supabase = createClient();
+const supabase = createClient(
+  import.meta.env.VITE_API_SUPABASE_URL,
+  import.meta.env.VITE_API_SUPABASE_KEY
+);
 
 interface HeaderProps {
   toggleSidebar: () => void;
