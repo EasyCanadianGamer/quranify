@@ -4,6 +4,7 @@ import { useParams, useNavigate } from 'react-router-dom';
 import { fetchSurah, fetchReciters, fetchVerseAudio, fetchChapterAudio } from '../utils/api';
 import CustomAudioPlayer from './AudioPlayer';
 import { FaPlay, FaPause, FaArrowLeft } from 'react-icons/fa';
+import { CiBookmark } from "react-icons/ci";
 import '../css/surah.css';
 
 const SurahDetail = () => {
@@ -125,6 +126,9 @@ const SurahDetail = () => {
       <div className="mt-4 space-y-4">
         {surah.arabic1.map((ayah: string, index: number) => (
           <div key={index} className="p-4 bg-white rounded-lg shadow-md flex items-center justify-between">
+            <button>
+          <CiBookmark size={24} className="text-blue-500" />
+          </button>
             <div className="flex-1">
             <p className="text-2xl text-right font-arabic leading-loose whitespace-normal break-words pb-8">{ayah}</p>              
             <p className="text-lg text-gray-700">{surah.english[index]}</p>

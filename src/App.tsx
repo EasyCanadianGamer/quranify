@@ -60,6 +60,8 @@ import Roadmap from "./components/Roadmap";
 import DuaList from "./components/DuaList";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
+import Login from "./components/Login";
+import Settings from "./components/Settings";
 const App = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -103,6 +105,8 @@ const App = () => {
               <Route path="/dua" element={<DuaList />} />
               <Route path="/about" element={<About />} />
               <Route path="/privacy" element={<Privacy />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/settings" element={<Settings />} />
             </Routes>
 
             {/* Bottom Rectangle Ad */}

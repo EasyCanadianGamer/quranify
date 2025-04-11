@@ -49,3 +49,77 @@ export const fetchChapterAudio = async (surahNumber: number) => {
     return response.data;
   };
   
+
+
+// // utils/api.ts
+// import { createClient } from './supbase';
+
+// const supabase = createClient();
+
+// export const getUserDetails = async () => {
+//   const { data, error } = await supabase.auth.getUser();
+//   if (error || !data.user) return null;
+//   return data.user;
+// };
+
+// export const getUserProfile = async (userId: string) => {
+//   const { data, error } = await supabase
+//     .from('profiles')
+//     .select('*')
+//     .eq('id', userId)
+//     .single();
+
+//   if (error) {
+//     console.error('Error fetching user profile:', error.message);
+//     return null;
+//   }
+
+//   return data;
+// };
+
+
+// utils/api.ts
+import { createClient } from './supbase';
+
+const supabase = createClient();
+
+export const getUserDetails = async () => {
+  const { data: userData, error: userError } = await supabase.auth.getUser();
+  if (userError || !userData.user) return null;
+
+  const userId = userData.user.id; // Get the user ID from the auth data
+
+  // Fetch the user profile
+  const { data: profileData, error: profileError } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', userId)
+    .single();
+
+  if (profileError) {
+    console.error('Error fetching user profile:', profileError.message);
+    return null;
+  }
+
+  // Combine user data and profile data
+  return {
+    ...userData.user,
+    avatar_url: profileData.avatar_url, // Include avatar_url from profile
+    updated_at: profileData.updated_at, // Include updated_at if needed
+  };
+};
+
+export const getUserProfile = async (userId: string) => {
+  const { data, error } = await supabase
+    .from('profiles')
+    .select('*')
+    .eq('id', userId)
+    .single();
+
+  if (error) {
+    console.error('Error fetching user profile:', error.message);
+    return null;
+  }
+
+  return data;
+};
