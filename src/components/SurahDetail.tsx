@@ -126,7 +126,7 @@ const SurahDetail = () => {
         {surah.arabic1.map((ayah: string, index: number) => (
           <div key={index} className="p-4 bg-white rounded-lg shadow-md flex items-center justify-between">
             <div className="flex-1">
-            <p className="text-2xl text-right font-arabic leading-loose whitespace-normal break-words pb-8">{ayah}</p>              
+            <p className="text-2xl text-right font-arabic leading-loose whitespace-normal break-words pb-8"> {index}. {ayah}</p>              
             <p className="text-lg text-gray-700">{surah.english[index]}</p>
             </div>
             {/* Verse Audio Button */}

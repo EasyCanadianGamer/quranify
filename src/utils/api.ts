@@ -6,7 +6,6 @@ const AUDIO_URL = import.meta.env.VITE_API_AUDIO_URL;
 
 
 // Fetch all Surahs
-// Fetch all Surahs
 export const fetchSurahs = async () => {
     const response = await axios.get(`${BASE_URL}/surah.json`);
     // Add a `number` field to each Surah based on its index
