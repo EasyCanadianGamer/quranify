@@ -33,44 +33,24 @@ export default function Signup() {
         throw new Error('Password must be at least 6 characters');
       }
 
-      // 2. Sign up with Supabase Auth
+      // 2. Sign up with Supabase Auth (trigger will handle profile creation)
       const { data: authData, error: authError } = await supabase.auth.signUp({
         email: formData.email,
         password: formData.password,
         options: {
           data: {
-            username: formData.username
+            username: formData.username  // This will be available to your trigger
           }
         }
       });
 
-      if (authError) {
-        console.error('Auth Error:', authError);
-        throw authError;
-      }
-
-      if (!authData.user) {
-        throw new Error('User creation failed - no user returned');
-      }
-
-      // 3. Create profile in profiles table
-      const { error: profileError } = await supabase
-        .from('profiles')
-        .insert({
-          id: authData.user.id,
-          username: formData.username,
-          email: formData.email
-        });
-
-      if (profileError) {
-        console.error('Profile Error:', profileError);
-        throw profileError;
-      }
+      if (authError) throw authError;
+      if (!authData.user) throw new Error('User creation failed');
 
       toast.success('Account created successfully! Please check your email for confirmation.');
       navigate('/');
     } catch (error: any) {
-      console.error('Full Error:', error);
+      console.error('Signup error:', error);
       toast.error(error.message || 'Signup failed. Please try again.');
     } finally {
       setLoading(false);
