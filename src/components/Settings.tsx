@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import  supabase  from '../utils/supbase';
-import { FaUser, FaEnvelope, FaImage, FaBookmark, FaCog, FaArrowLeft } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaImage, FaBookmark,FaUserEdit, FaCog, FaArrowLeft } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 export default function Settings() {
@@ -113,7 +113,7 @@ export default function Settings() {
             onClick={() => setActiveTab('profile')}
             className={`flex items-center w-full p-3 rounded-lg mb-2 ${activeTab === 'profile' ? 'bg-indigo-100 text-indigo-700' : 'text-gray-700 hover:bg-gray-100'}`}
           >
-            <FaUser className="mr-3" />
+            < FaUserEdit className="mr-3" />
             Profile Settings
           </button>
           <button
@@ -131,7 +131,7 @@ export default function Settings() {
         {activeTab === 'profile' ? (
           <div className="bg-white rounded-lg shadow p-6 max-w-2xl">
             <h2 className="text-2xl font-bold mb-6 flex items-center">
-              <FaUser className="mr-2" />
+              <FaUserEdit className="mr-2" />
               Profile Settings
             </h2>
             
@@ -173,9 +173,16 @@ export default function Settings() {
               <div className="flex-1">
                 <form onSubmit={handleProfileUpdate}>
                   <div className="mb-4">
-                    <label className="block text-gray-700 mb-2" htmlFor="username">
+
+                  <div className="flex items-center text-gray-700 mb-2">
+                  <FaUser className ="mr-2" />
+
+                  <label className="block text-gray-700 mb-2" htmlFor="username">
                       Username
                     </label>
+
+                    </div>
+                 
                     <input
                       id="username"
                       type="text"
@@ -186,9 +193,10 @@ export default function Settings() {
                   </div>
 
                   <div className="mb-4">
-                    <label className="block text-gray-700 mb-2" htmlFor="email">
-                      Email
-                    </label>
+                  <div className="flex items-center text-gray-700 mb-2">
+    <FaEnvelope className="mr-2" />
+    <label htmlFor="email">Email</label>
+  </div>
                     <input
                       id="email"
                       type="email"
