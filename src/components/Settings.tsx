@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import  supabase  from '../utils/supbase';
-import { FaUser, FaEnvelope, FaImage, FaBookmark,FaUserEdit, FaCog, FaArrowLeft } from 'react-icons/fa';
+import { FaUser, FaEnvelope, FaImage, FaBookmark,FaUserEdit } from 'react-icons/fa';
 import { toast } from 'react-toastify';
 
 export default function Settings() {
