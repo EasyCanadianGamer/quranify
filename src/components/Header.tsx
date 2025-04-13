@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { RxHamburgerMenu } from "react-icons/rx";
-import { FaUserCircle, FaCog, FaBookmark, FaSignOutAlt, FaUserPlus } from "react-icons/fa";
+import { FaUserCircle, FaCog, FaBookmark, FaSignOutAlt } from "react-icons/fa";
 import word from "../assets/Quranify(word).png";
 import { useState, useEffect, useRef } from 'react';
 import  supabase  from '../utils/supbase';
@@ -137,22 +137,34 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
           )}
         </div>
       ) : (
-        <div className="flex items-center space-x-2">
-        <Link
-          to="/login"
-          className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
-        >
-          <FaUserCircle className="mr-2" />
-          Login
-        </Link>
-        <Link
-          to="/signup"
-          className="inline-flex items-center px-3 py-2 text-sm font-medium rounded-md text-blue-700 bg-blue-100 hover:bg-blue-200 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-blue-500 transition-colors"
-        >
-          <FaUserPlus className="mr-2" />
-          Sign Up
-        </Link>
-      </div>
+      <div className="relative">
+      <button
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
+      >
+        <FaUserCircle className="mr-2" />
+        Account
+      </button>
+      
+      {isDropdownOpen && (
+        <div className="absolute right-0 mt-2 w-40 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 z-50">
+          <Link
+            to="/login"
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            onClick={() => setIsDropdownOpen(false)}
+          >
+            Login
+          </Link>
+          <Link
+            to="/signup"
+            className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            onClick={() => setIsDropdownOpen(false)}
+          >
+            Sign Up
+          </Link>
+        </div>
+      )}
+    </div>
       )}
     </div>
   </div>
