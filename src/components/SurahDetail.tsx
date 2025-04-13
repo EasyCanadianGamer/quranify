@@ -57,6 +57,11 @@ const SurahDetail = () => {
     }
   };
 
+  const convertToArabicNumerals = (num: number): string => {
+    const arabicNumerals = ['٠', '١', '٢', '٣', '٤', '٥', '٦', '٧', '٨', '٩'];
+    return num.toString().split('').map(digit => arabicNumerals[parseInt(digit)]).join('');
+  };
+
   // Function to handle play/pause for verse audio
   const handleVerseAudio = (index: number) => {
     const audioUrl = fetchVerseAudio(selectedReciter, surah.surahNo, index + 1);
@@ -126,8 +131,14 @@ const SurahDetail = () => {
         {surah.arabic1.map((ayah: string, index: number) => (
           <div key={index} className="p-4 bg-white rounded-lg shadow-md flex items-center justify-between">
             <div className="flex-1">
-            <p className="text-2xl text-right font-arabic leading-loose whitespace-normal break-words pb-8">{ayah}</p>              
-            <p className="text-lg text-gray-700">{surah.english[index]}</p>
+            <div className="flex items-start gap-4">
+  <span className="text-2xl font-arabic ">{index + 1}.</span>
+  <p className="text-2xl text-right font-arabic leading-loose whitespace-normal break-words flex-1">
+    {ayah}
+    <span className="mx-2">{" "}</span> {/* This adds consistent space */}
+    .{convertToArabicNumerals(index + 1)}
+  </p>
+</div>            <p className="text-lg text-gray-700">{surah.english[index]}</p>
             </div>
             {/* Verse Audio Button */}
             <button

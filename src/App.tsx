@@ -60,6 +60,11 @@ import Roadmap from "./components/Roadmap";
 import DuaList from "./components/DuaList";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
+import Login from "./components/Login";
+import Signup from "./components/Signup";
+import { Bounce, ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import Settings from "./components/Settings";
 const App = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -103,7 +108,24 @@ const App = () => {
               <Route path="/dua" element={<DuaList />} />
               <Route path="/about" element={<About />} />
               <Route path="/privacy" element={<Privacy />} />
+              <Route path="/login" element={<Login />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/settings" element={<Settings />} />
             </Routes>
+
+            <ToastContainer
+position="top-right"
+autoClose={2000}
+hideProgressBar={false}
+newestOnTop={false}
+closeOnClick={false}
+rtl={false}
+pauseOnFocusLoss
+draggable
+pauseOnHover
+theme="light"
+transition={Bounce}
+/>
 
             {/* Bottom Rectangle Ad */}
             <div className="max-w-[300px] mx-auto my-8">
