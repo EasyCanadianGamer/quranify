@@ -14,7 +14,6 @@
     "@supabase/supabase-js": "^2.49.4",
     "@tailwindcss/vite": "^4.0.12",
     "axios": "^1.8.2",
-    "nsfwjs": "^4.2.1",
     "react": "^19.0.0",
     "react-audio-player": "^0.17.0",
     "react-dom": "^19.0.0",
