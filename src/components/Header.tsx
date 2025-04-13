@@ -46,29 +46,21 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
   const dropdownRef = useRef<HTMLDivElement>(null);
   const [profile, setProfile] = useState<any>(null);
   const [loading, setLoading] = useState(false);
-  const [id, setId] = useState<string | null>(null);
+  
   // Check for existing session on mount
   useEffect(() => {
-    const checkSession = async () => {
+    const getSession = async () => {
       const { data: { session } } = await supabase.auth.getSession();
-      if (session) {
-        setUser(session.user);
-      }
+      setUser(session?.user ?? null); // More concise null handling
     };
-    
-    checkSession();
-
-    const { data: authListener } = supabase.auth.onAuthStateChange((event, session) => {
-      if (event === 'SIGNED_IN' && session) {
-        setUser(session.user);
-      } else if (event === 'SIGNED_OUT') {
-        setUser(null);
-      }
+  
+    getSession();
+  
+    const { data: { subscription } } = supabase.auth.onAuthStateChange((_event, session) => {
+      setUser(session?.user ?? null); // Handles all cases in one line
     });
-
-    return () => {
-      authListener.subscription.unsubscribe();
-    };
+  
+    return () => subscription.unsubscribe();
   }, []);
 
   useEffect(() => {
@@ -113,11 +105,6 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
   };
 
 
-  useEffect(() => {
-    if (user) {
-      setId(user.id);
-      }
-  }, [user]);
 
 
   const handleLogout = async () => {
