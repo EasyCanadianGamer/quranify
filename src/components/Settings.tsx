@@ -1,7 +1,9 @@
 import { useState, useEffect } from 'react';
-import  supabase  from '../utils/supbase';
-import { FaUser, FaEnvelope, FaImage, FaBookmark,FaUserEdit } from 'react-icons/fa';
+import { useNavigate } from 'react-router-dom';
+import supabase from '../utils/supbase';
+import { FaUser, FaEnvelope, FaImage, FaBookmark, FaUserEdit, FaTrash } from 'react-icons/fa';
 import { toast } from 'react-toastify';
+import supabase_admin from '../utils/subabaseadmin';
 
 export default function Settings() {
   const [activeTab, setActiveTab] = useState<'profile' | 'bookmarks'>('profile');
@@ -10,6 +12,8 @@ export default function Settings() {
   const [loading, setLoading] = useState(false);
   const [avatarUrl, setAvatarUrl] = useState<string | null>(null);
   const [uploading, setUploading] = useState(false);
+  const navigate = useNavigate();
+  const [showConfirmDelete, setShowConfirmDelete] = useState(false);
 
   useEffect(() => {
     fetchUserProfile();
@@ -49,7 +53,13 @@ export default function Settings() {
 
     setUploading(true);
     try {
-      // Upload image to storage
+      // Delete old avatar if exists
+      if (avatarUrl) {
+        const oldFileName = avatarUrl.split('/').pop();
+        await supabase.storage.from('avatars').remove([`avatars/${oldFileName}`]);
+      }
+
+      // Upload new image
       const { error: uploadError } = await supabase.storage
         .from('avatars')
         .upload(filePath, file);
@@ -61,7 +71,7 @@ export default function Settings() {
         .from('avatars')
         .getPublicUrl(filePath);
 
-      // Update profile with new avatar URL
+      // Update profile
       const { error: updateError } = await supabase
         .from('profiles')
         .update({ avatar_url: publicUrl })
@@ -101,6 +111,45 @@ export default function Settings() {
     }
   };
 
+  const handleDeleteAccount = async () => {
+      setShowConfirmDelete(false);
+
+
+    try {
+      setLoading(true);
+      toast.info('Deleting your account...');
+
+      // 1. Delete user's avatar if exists
+      if (avatarUrl) {
+        const fileName = avatarUrl.split('/').pop();
+        await supabase.storage.from('avatars').remove([`avatars/${fileName}`]);
+      }
+
+      // 2. Delete user's profile
+      const { error: profileError } = await supabase
+        .from('profiles')
+        .delete()
+        .eq('id', user.id);
+
+      if (profileError) throw profileError;
+
+      // 3. Delete auth user (requires service role)
+      const { error: authError } = await supabase_admin.auth.admin.deleteUser(user.id);
+      if (authError) throw authError;
+
+      // 4. Sign out
+      await supabase.auth.signOut();
+      
+      toast.success('Account deleted successfully');
+      navigate('/');
+    } catch (error: any) {
+      toast.error(error.message || 'Failed to delete account');
+      console.error('Delete account error:', error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   return (
     <div className="flex h-screen bg-gray-100">
       {/* Sidebar */}
@@ -113,7 +162,7 @@ export default function Settings() {
             onClick={() => setActiveTab('profile')}
             className={`flex items-center w-full p-3 rounded-lg mb-2 ${activeTab === 'profile' ? 'bg-indigo-100 text-indigo-700' : 'text-gray-700 hover:bg-gray-100'}`}
           >
-            < FaUserEdit className="mr-3" />
+            <FaUserEdit className="mr-3" />
             Profile Settings
           </button>
           <button
@@ -173,30 +222,25 @@ export default function Settings() {
               <div className="flex-1">
                 <form onSubmit={handleProfileUpdate}>
                   <div className="mb-4">
-
-                  <div className="flex items-center text-gray-700 mb-2">
-                  <FaUser className ="mr-2" />
-
-                  <label className="block text-gray-700 mb-2" htmlFor="username">
-                      Username
-                    </label>
-
+                    <div className="flex items-center text-gray-700 mb-2">
+                      <FaUser className="mr-2" />
+                      <label htmlFor="username">Username</label>
                     </div>
-                 
                     <input
                       id="username"
                       type="text"
                       className="w-full p-3 border border-gray-300 rounded-lg focus:ring-2 focus:ring-indigo-500 focus:border-indigo-500"
                       value={profile?.username || ''}
                       onChange={(e) => setProfile({...profile, username: e.target.value})}
+                      required
                     />
                   </div>
 
                   <div className="mb-4">
-                  <div className="flex items-center text-gray-700 mb-2">
-    <FaEnvelope className="mr-2" />
-    <label htmlFor="email">Email</label>
-  </div>
+                    <div className="flex items-center text-gray-700 mb-2">
+                      <FaEnvelope className="mr-2" />
+                      <label htmlFor="email">Email</label>
+                    </div>
                     <input
                       id="email"
                       type="email"
@@ -215,6 +259,30 @@ export default function Settings() {
                     {loading ? 'Saving...' : 'Save Changes'}
                   </button>
                 </form>
+
+                {/* Danger Zone */}
+                <div className="mt-12 pt-6 border-t border-gray-200">
+                  <h3 className="text-lg font-medium text-red-600 mb-4">Danger Zone</h3>
+                  <div className="bg-red-50 p-4 rounded-lg">
+                    <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
+                      <div>
+                        <h4 className="font-medium text-red-700">Delete Account</h4>
+                        <p className="text-sm text-red-600">
+                          Permanently remove your account and all associated data
+                        </p>
+                      </div>
+                      <button
+                        type="button"
+                        onClick={() => setShowConfirmDelete(true)}
+                        disabled={loading}
+                        className="flex items-center justify-center px-4 py-2 bg-red-100 text-red-700 rounded-md hover:bg-red-200 focus:outline-none focus:ring-2 focus:ring-red-500 focus:ring-offset-2 disabled:opacity-50 transition-colors"
+                      >
+                        <FaTrash className="mr-2" />
+                        Delete Account
+                      </button>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
@@ -250,8 +318,35 @@ export default function Settings() {
           </div>
         )}
       </div>
+
+      {showConfirmDelete && (
+  <div className="fixed inset-0 z-50 flex items-center justify-center backdrop-blur-sm">
+    <div className="bg-white rounded-xl p-6 w-full max-w-md shadow-lg">
+      <h3 className="text-lg font-semibold text-gray-800 mb-2">
+        Confirm Account Deletion
+      </h3>
+      <p className="text-gray-600 mb-4">
+        Are you sure you want to permanently delete your account? This action cannot be undone.
+      </p>
+      <div className="flex justify-end gap-3">
+        <button
+          onClick={() => setShowConfirmDelete(false)}
+          className="px-4 py-2 rounded-md border border-gray-300 hover:bg-gray-100"
+        >
+          Cancel
+        </button>
+        <button
+          onClick={handleDeleteAccount}
+          className="px-4 py-2 rounded-md bg-red-600 text-white hover:bg-red-700 focus:outline-none focus:ring-2 focus:ring-red-500"
+          disabled={loading}
+        >
+          {loading ? 'Deleting...' : 'Delete'}
+        </button>
+      </div>
+    </div>
+  </div>
+)}
+
     </div>
   );
 }
-
-
