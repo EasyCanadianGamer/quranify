@@ -52,6 +52,7 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
       toast.success('Logged out successfully');
       setUser(null);
       setIsDropdownOpen(false);
+      window.location.href = '/';
     }
   };
 
