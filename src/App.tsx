@@ -61,7 +61,7 @@ import DuaList from "./components/DuaList";
 import About from "./components/About";
 import Privacy from "./components/Privacy";
 import Login from "./components/Login";
-import Signup from "./components/signup";
+import Signup from "./components/Signup";
 import { Bounce, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Settings from "./components/Settings";

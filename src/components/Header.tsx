@@ -31,9 +31,10 @@ import { Link } from 'react-router-dom';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaUserCircle, FaCog, FaBookmark, FaSignOutAlt, FaUserPlus } from "react-icons/fa";
 import word from "../assets/Quranify(word).png";
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, use } from 'react';
 import supabase  from '../utils/supbase';
 import { toast } from 'react-toastify';
+import ProfilePicture from './ProfilePicture';
 
 interface HeaderProps {
   toggleSidebar: () => void;
@@ -43,7 +44,9 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
   const [user, setUser] = useState<any>(null);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
-
+  const [profile, setProfile] = useState<any>(null);
+  const [loading, setLoading] = useState(false);
+  const [id, setId] = useState<string | null>(null);
   // Check for existing session on mount
   useEffect(() => {
     const checkSession = async () => {
@@ -80,6 +83,42 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
       document.removeEventListener('mousedown', handleClickOutside);
     };
   }, []);
+
+
+  useEffect(() => {
+    fetchUserProfile();
+  }, []);
+
+  const fetchUserProfile = async () => {
+    setLoading(true);
+    try {
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) throw new Error('No user logged in');
+      
+      setUser(user);
+
+      const { data: profileData, error } = await supabase
+        .from('profiles')
+        .select('*')
+        .eq('id', user.id)
+        .single();
+
+      if (error) throw error;
+      setProfile(profileData);
+    } catch (error: any) {
+      toast.error(error.message);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+
+  useEffect(() => {
+    if (user) {
+      setId(user.id);
+      }
+  }, [user]);
+
 
   const handleLogout = async () => {
     const { error } = await supabase.auth.signOut();
@@ -123,9 +162,16 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
                 )}
                 
                 {/* Profile picture */}
-                <div className="w-10 h-10 rounded-full bg-gradient-to-r from-blue-500 to-purple-600 flex items-center justify-center text-white font-bold text-lg group-hover:from-blue-600 group-hover:to-purple-700 transition-colors">
-                  {getInitial()}
-                </div>
+                <div className="group-hover:from-blue-600 group-hover:to-purple-700 transition-colors">
+    <ProfilePicture 
+      userId={user.id}
+      size="md"
+      className="rounded-full border-2 border-white"
+      initial={getInitial()}
+    />
+  </div>
+
+             
               </button>
 
               {/* Dropdown menu - now properly positioned below */}
