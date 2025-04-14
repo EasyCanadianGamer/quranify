@@ -100,7 +100,7 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
 
           {/* Dropdown menu remains the same */}
           {isDropdownOpen && (
-            <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 z-50">
+            <div className="absolute right-0 top-full mr-24 w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 z-50 ">
               <div className="absolute -top-1.5 right-3 w-3 h-3 bg-white transform rotate-45 border-t border-r border-gray-200"></div>
               <div className="px-4 py-3">
                 <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
