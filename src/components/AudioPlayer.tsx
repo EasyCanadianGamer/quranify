@@ -6,10 +6,18 @@ const CustomAudioPlayer = ({
   audioUrl,
   onNext,
   title,
+  onPlay,
+  onPause,
+  onEnded
+  
 }: {
   audioUrl: string;
   onNext?: () => void;
   title?: string;
+  onPlay?: () => void;
+  onPause?: () => void;
+  onEnded?: () => void;
+
 }) => {
   const audioRef = useRef<HTMLAudioElement>(null);
   const [isPlaying, setIsPlaying] = useState(false);
@@ -43,13 +51,29 @@ const CustomAudioPlayer = ({
     if (audioRef.current) {
       if (isPlaying) {
         audioRef.current.pause();
+        onPause?.();
       } else {
         audioRef.current.play();
+        onPlay?.();
       }
       setIsPlaying(!isPlaying);
     }
   };
 
+  useEffect(() => {
+    const audio = audioRef.current;
+    if (audio) {
+      const handleEnded = () => {
+        setIsPlaying(false);
+        onEnded?.();
+      };
+      
+      audio.addEventListener('ended', handleEnded);
+      return () => {
+        audio.removeEventListener('ended', handleEnded);
+      };
+    }
+  }, [audioUrl, onEnded]);
   // Seek handler
   const handleSeek = (time: number) => {
     if (audioRef.current) {

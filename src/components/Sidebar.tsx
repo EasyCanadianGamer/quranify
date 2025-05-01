@@ -1,12 +1,13 @@
 // src/components/Sidebar.tsx
 import { AiOutlineClose } from "react-icons/ai";
-
 interface SidebarProps {
   isOpen: boolean;
   toggleSidebar: () => void;
 }
 
+
 const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
+  
   return (
     <>
       {/* Overlay */}
@@ -41,7 +42,6 @@ const Sidebar = ({ isOpen, toggleSidebar }: SidebarProps) => {
                 Duas
               </a>
             </li>
-            {/* Add more menu items as needed */}
             <li>
               <a href="roadmap" className="block p-2 hover:bg-gray-100 rounded">
                 Roadmap

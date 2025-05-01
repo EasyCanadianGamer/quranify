@@ -38,7 +38,8 @@ const ROADMAP_DATA: RoadmapItem[] = [
     id: 4,
     title: 'Bookmark Feature',
     description: 'Implement a bookmark feature',
-    status: 'planned'
+    status: 'in-progress',
+    targetDate: '2025-5-20'
   },
   {
     id: 5,

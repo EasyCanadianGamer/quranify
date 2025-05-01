@@ -16,6 +16,7 @@ const SurahDetail = () => {
   const [currentVerseIndex, setCurrentVerseIndex] = useState<number | null>(null); // Track the currently playing verse index
   const [isPlaying, setIsPlaying] = useState(false); // Track play/pause state
   const audioRef = useRef<HTMLAudioElement | null>(null); // Ref to store the Audio object
+  const [isChapterPlaying, setIsChapterPlaying] = useState(false);
 
   useEffect(() => {
     const loadSurah = async () => {
@@ -62,39 +63,48 @@ const SurahDetail = () => {
     return num.toString().split('').map(digit => arabicNumerals[parseInt(digit)]).join('');
   };
 
-  // Function to handle play/pause for verse audio
-  const handleVerseAudio = (index: number) => {
-    const audioUrl = fetchVerseAudio(selectedReciter, surah.surahNo, index + 1);
 
-    if (currentVerseIndex === index && isPlaying) {
-      // Pause the currently playing audio
-      audioRef.current?.pause();
+  // Add this function to your SurahDetail component
+const stopAllAudio = () => {
+  // Stop verse audio if playing
+  if (audioRef.current) {
+    audioRef.current.pause();
+    audioRef.current = null;
+  }
+  setIsPlaying(false);
+  setCurrentVerseIndex(null);
+  
+  // Stop chapter audio if playing (we'll need to modify CustomAudioPlayer to expose this)
+};
+
+// Modify your handleVerseAudio function:
+const handleVerseAudio = (index: number) => {
+  const audioUrl = fetchVerseAudio(selectedReciter, surah.surahNo, index + 1);
+
+  if (currentVerseIndex === index && isPlaying) {
+    // Pause the currently playing audio
+    stopAllAudio();
+  } else {
+    // Stop all audio first
+    stopAllAudio();
+    
+    // Create a new Audio object and play it
+    const audio = new Audio(audioUrl);
+    audioRef.current = audio;
+    audio.play();
+
+    // Update state
+    setCurrentVerseIndex(index);
+    setIsPlaying(true);
+
+    // Handle when the audio ends
+    audio.onended = () => {
       setIsPlaying(false);
-    } else {
-      // Stop the current audio if it's playing
-      if (audioRef.current) {
-        audioRef.current.pause();
-        audioRef.current = null;
-      }
-
-      // Create a new Audio object and play it
-      const audio = new Audio(audioUrl);
-      audioRef.current = audio;
-      audio.play();
-
-      // Update state
-      setCurrentVerseIndex(index);
-      setIsPlaying(true);
-
-      // Handle when the audio ends
-      audio.onended = () => {
-        setIsPlaying(false);
-        setCurrentVerseIndex(null);
-        audioRef.current = null;
-      };
-    }
-  };
-
+      setCurrentVerseIndex(null);
+      audioRef.current = null;
+    };
+  }
+};
   // Show loading state if surah is not yet loaded
   if (!surah) return <div>Loading...</div>;
 
@@ -164,7 +174,14 @@ const SurahDetail = () => {
               chapterAudio[selectedReciter]?.originalUrl || chapterAudio[selectedReciter]?.url
             }
             onNext={handleNextSurah}
-            title={`Surah ${surah.surahName} - ${surah.surahNameArabic}`} // Add title
+            title={`Surah ${surah.surahName} - ${surah.surahNameArabic}`} 
+            onPlay={() => {
+              stopAllAudio(); // Stop any verse audio first
+              setIsChapterPlaying(true);
+            }}// Add title
+
+            onPause={() => setIsChapterPlaying(false)}
+            onEnded={() => setIsChapterPlaying(false)}          
           />
         </div>
       </div>
