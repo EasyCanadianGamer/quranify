@@ -192,18 +192,24 @@ const RoadmapCard = ({
 );
 
 const FeatureSuggestionSection = () => (
-  <div className="mt-12 p-6 bg-blue-50 rounded-lg">
-    <h2 className="text-xl font-semibold mb-4">Suggest an Improvement</h2>
-    <p className="mb-4">Have an idea for improving Quranify? We'd love to hear it!</p>
-    <div className="flex flex-wrap gap-4">
-      <button className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition">
-        Submit Feature Request
-      </button>
-      <button className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition">
-        Report a Bug
-      </button>
-    </div>
+<div className="mt-12 p-6 bg-blue-50 rounded-lg">
+  <h2 className="text-xl font-semibold mb-4">Suggest an Improvement</h2>
+  <p className="mb-4">Have an idea for improving Quranify? We'd love to hear it!</p>
+  <div className="flex flex-wrap gap-4">
+    <button 
+      onClick={() => window.open('https://github.com/EasyCanadianGamer/quranify/issues/new?template=feature_request.md', '_blank')}
+      className="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition"
+    >
+      Submit Feature Request
+    </button>
+    <button 
+      onClick={() => window.open('https://github.com/EasyCanadianGamer/quranify/issues/new?template=bug_report.md', '_blank')}
+      className="px-4 py-2 bg-red-600 text-white rounded hover:bg-red-700 transition"
+    >
+      Report a Bug
+    </button>
   </div>
+</div>
 );
 
 export default Roadmap;
