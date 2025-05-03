@@ -53,7 +53,7 @@ const Footer = () => {
           {/* Right Section: Social Media Links */}
           <div className="flex space-x-4">
             <a
-              href="https://github.com/EasyCanadianGamer"
+              href="https://github.com/EasyCanadianGamer/quranify"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-blue-700"
