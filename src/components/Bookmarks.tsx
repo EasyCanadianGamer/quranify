@@ -1,8 +1,7 @@
 import { useEffect, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import supabase  from '../utils/supbase';
-import { FaBookmark, FaArrowLeft, FaQuran } from 'react-icons/fa';
-import CustomAudioPlayer from './AudioPlayer';
+import { FaArrowLeft, FaQuran } from 'react-icons/fa';
 
 type Bookmark = {
   id: string;
@@ -13,7 +12,6 @@ type Bookmark = {
 const Bookmarks = () => {
   const [bookmarks, setBookmarks] = useState<Bookmark[]>([]);
   const [loading, setLoading] = useState(true);
-  const [selectedReciter, setSelectedReciter] = useState('1'); // Default reciter
   const navigate = useNavigate();
 
   // Fetch bookmarks based on user/guest status
