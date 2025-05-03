@@ -65,6 +65,7 @@ import Signup from "./components/Signup";
 import { Bounce, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Settings from "./components/Settings";
+import Bookmark from "./components/Bookmarks";
 const App = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);
@@ -111,6 +112,7 @@ const App = () => {
               <Route path="/login" element={<Login />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/settings" element={<Settings />} />
+              <Route path="/bookmarks" element={<Bookmark />} />
             </Routes>
 
             <ToastContainer
