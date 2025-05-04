@@ -55,11 +55,11 @@ const ROADMAP_DATA: RoadmapItem[] = [
   },
   {
     id: 6,
-    title: 'Mobile Responsiveness Issues',
-    description: 'Fix layout problems on small screens',
+    title: 'Repeating Ayahs',
+    description: 'Add repeating Ayahs for memorization',
     status: 'in-progress',
-    type: 'bug',
-    targetDate: '2025-5-15'
+    type: 'planned',
+    targetDate: '2025-5-30'
   },
 ];
 
