@@ -57,8 +57,8 @@ const ROADMAP_DATA: RoadmapItem[] = [
     id: 6,
     title: 'Repeating Ayahs',
     description: 'Add repeating Ayahs for memorization',
-    status: 'in-progress',
-    type: 'planned',
+    status: 'planned',
+    type: 'feature',
     targetDate: '2025-5-30'
   },
 ];
