@@ -1,7 +1,7 @@
 import { Link } from 'react-router-dom';
 import { RxHamburgerMenu } from "react-icons/rx";
 import { FaUserCircle, FaCog, FaBookmark, FaSignOutAlt } from "react-icons/fa";
-import word from "../assets/Quranify(word).png";
+import word from "../assets/Quranfi(word).svg";
 import { useState, useEffect, useRef } from 'react';
 import  supabase  from '../utils/supbase';
 import { toast } from 'react-toastify';
@@ -78,67 +78,69 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
   </div>
 
     {/* Right-aligned auth section */}
-    <div className="w-24 flex justify-end" ref={dropdownRef}>
-      {user ? (
-        <div className="flex items-center">
-          <button
-            onClick={() => setIsDropdownOpen(!isDropdownOpen)}
-            className="relative flex items-center justify-center group"
-            aria-label="User menu"
-          >
-            {isDropdownOpen && (
-              <div className="absolute -inset-1.5 border-2 border-white rounded-full animate-ping opacity-75"></div>
-            )}
-            
-            <ProfilePicture 
-              userId={user.id}
-              size="md"
-              className="rounded-full border-2 border-white group-hover:border-blue-200 transition-all"
-              initial={getInitial()}
-            />
-          </button>
+    <div className="flex justify-end" ref={dropdownRef}>
+  {user ? (
+    <div className="relative flex items-center"> {/* Changed to relative */}
+      <button
+        onClick={() => setIsDropdownOpen(!isDropdownOpen)}
+        className="relative flex items-center justify-center group"
+        aria-label="User menu"
+      >
+        {isDropdownOpen && (
+          <div className="absolute -inset-1.5 border-2 border-white rounded-full animate-ping opacity-75"></div>
+        )}
+        
+        <ProfilePicture 
+          userId={user.id}
+          size="md"
+          className="rounded-full border-2 border-white group-hover:border-blue-200 transition-all"
+          initial={getInitial()}
+        />
+      </button>
 
-          {/* Dropdown menu remains the same */}
-          {isDropdownOpen && (
-            <div className="absolute right-0 top-full mr-24 w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 z-50 ">
-              <div className="absolute -top-1.5 right-3 w-3 h-3 bg-white transform rotate-45 border-t border-r border-gray-200"></div>
-              <div className="px-4 py-3">
-                <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
-              </div>
-              
-              <div className="py-1">
-                <Link
-                  to="/settings"
-                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => setIsDropdownOpen(false)}
-                >
-                  <FaCog className="mr-3 text-gray-400" />
-                  Settings
-                </Link>
-                <Link
-                  to="/bookmarks"
-                  className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                  onClick={() => setIsDropdownOpen(false)}
-                >
-                  <FaBookmark className="mr-3 text-gray-400" />
-                  Bookmarks
-                </Link>
-              </div>
-              
-              <div className="py-1">
-                <button
-                  onClick={handleLogout}
-                  className="flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
-                >
-                  <FaSignOutAlt className="mr-3 text-gray-400" />
-                  Logout
-                </button>
-              </div>
-            </div>
-          )}
+      {/* Dropdown menu - updated positioning */}
+      {isDropdownOpen && (
+        <div className="absolute right-0 top-full mt-2 w-56 bg-white rounded-md shadow-lg ring-1 ring-black ring-opacity-5 divide-y divide-gray-100 z-50">
+          {/* Arrow indicator - positioned relative to button */}
+          <div className="absolute -top-1.5 right-4 w-3 h-3 bg-white transform rotate-45 border-t border-r border-gray-200"></div>
+          
+          <div className="px-4 py-3">
+            <p className="text-sm font-medium text-gray-900 truncate">{user.email}</p>
+          </div>
+          
+          <div className="py-1">
+            <Link
+              to="/settings"
+              className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              onClick={() => setIsDropdownOpen(false)}
+            >
+              <FaCog className="mr-3 text-gray-400" />
+              Settings
+            </Link>
+            <Link
+              to="/bookmarks"
+              className="flex items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+              onClick={() => setIsDropdownOpen(false)}
+            >
+              <FaBookmark className="mr-3 text-gray-400" />
+              Bookmarks
+            </Link>
+          </div>
+          
+          <div className="py-1">
+            <button
+              onClick={handleLogout}
+              className="flex w-full items-center px-4 py-2 text-sm text-gray-700 hover:bg-gray-100"
+            >
+              <FaSignOutAlt className="mr-3 text-gray-400" />
+              Logout
+            </button>
+          </div>
         </div>
-      ) : (
-      <div className="relative">
+      )}
+    </div>
+  ) : (
+    <div className="relative">
       <button
         onClick={() => setIsDropdownOpen(!isDropdownOpen)}
         className="flex items-center px-3 py-2 text-sm font-medium rounded-md text-white bg-blue-600 hover:bg-blue-700 transition-colors"
@@ -166,8 +168,8 @@ const Header = ({ toggleSidebar }: HeaderProps) => {
         </div>
       )}
     </div>
-      )}
-    </div>
+  )}
+</div>
   </div>
 </header>
   );
