@@ -66,6 +66,8 @@ import { Bounce, ToastContainer } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import Settings from "./components/Settings";
 import Bookmark from "./components/Bookmarks";
+import './css/surah.css';
+
 const App = () => {
 
   const [isSidebarOpen, setIsSidebarOpen] = useState(false);

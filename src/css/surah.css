@@ -1,3 +1,9 @@
 .font-arabic {
-    font-family: 'Amiri Quran', serif;
+    font-family: 'KFQF', serif;
+    src: url('../../public/fonts/HafsNastaleeq\ Ver10.otf') format('opentype');
+    font-weight: normal;
+    font-style: normal;
   }
+
+
+ 
