@@ -57,9 +57,25 @@ const ROADMAP_DATA: RoadmapItem[] = [
     id: 6,
     title: 'Repeating Ayahs',
     description: 'Add repeating Ayahs for memorization',
+    status: 'completed',
+    type: 'feature',
+    completedDate: '2025-5-17'
+  },
+  {
+    id: 7,
+    title: 'Fonts',
+    description: 'Add fonts and a font resizer for arabic',
+    status: 'completed',
+    type: 'feature',
+    completedDate: '2025-5-17'
+  },
+  {
+    id: 9,
+    title: 'Word by Word ',
+    description: 'Add Wordy by Word Ayahs for memorization',
     status: 'planned',
     type: 'feature',
-    targetDate: '2025-5-30'
+    targetDate: '2025-6-30'
   },
 ];
 
