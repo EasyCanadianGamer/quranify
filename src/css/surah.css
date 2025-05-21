@@ -1,7 +1,6 @@
 @font-face  {
     font-family: 'KFQF', serif;
-    src: url('../fonts/HafsNastaleeqVer10.otf') format('opentype');
-    font-weight: normal;
+    src: url('/fonts/HafsNastaleeqVer10.otf');
     font-style: normal;
   }
 
