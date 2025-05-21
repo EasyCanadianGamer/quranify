@@ -1,4 +1,4 @@
-@font-face  {
+/* @font-face  {
     font-family: 'KFQF', serif;
     src: url('/fonts/HafsNastaleeqVer10.otf') format('opentype'),
     url('../fonts/HafsNastaleeqVer10.woff') format('woff'),
@@ -6,9 +6,9 @@
          url('../fonts/HafsNastaleeqVer10.woff2') format('woff2');
     font-weight: normal;
     font-style: normal;
-  }
+  } */
 
 
  .font-arabic{
-    font-family: 'KFQF', serif;
+    font-family: 'HafsNastaleeqVer10', Arial, sans-serif;
  }
