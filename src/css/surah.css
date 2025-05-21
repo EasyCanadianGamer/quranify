@@ -1,9 +1,11 @@
-.font-arabic {
+@font-face  {
     font-family: 'KFQF', serif;
-    src: url('../assets/fonts/HafsNastaleeqVer10.otf') format('opentype');
+    src: url('../../public/fonts/HafsNastaleeqVer10.otf') format('opentype');
     font-weight: normal;
     font-style: normal;
   }
 
 
- 
+ .font-arabic{
+    font-family: 'KFQF', serif;
+ }
